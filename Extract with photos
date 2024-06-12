@@ -1,0 +1,86 @@
+import pyautogui
+import time
+import csv
+import pytesseract
+import pygetwindow as gw
+import re
+
+def activate_window(window_title):
+    try:
+        window = gw.getWindowsWithTitle(window_title)[0]
+        window.activate()
+        return True
+    except IndexError:
+        print(f"Window with title '{window_title}' not found.")
+        return False
+
+def process_csv_and_capture_numbers(csv_filename, output_csv_filename):
+    window_title = "Remote Desktop Connection"
+
+    with open(csv_filename, 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        next(reader)  # Skip the header if present
+
+        with open(output_csv_filename, 'w', newline='') as output_csv:
+            csv_writer = csv.writer(output_csv)
+            csv_writer.writerow(['Claim Number', 'Filtered Numbers'])
+
+            for row in reader:
+                claim_number = row[0]  # Assuming the claim number is in the first column
+
+                # Activate the Remote Desktop Connection window
+                if activate_window(window_title):
+                    # Simulate keystrokes for the claim number
+                    pyautogui.write('S')
+                    time.sleep(0.25)
+                    pyautogui.press('enter')
+                    #time.sleep(2)
+                    pyautogui.press('esc')
+                    #time.sleep(2)
+                    pyautogui.press('enter')
+                    #time.sleep(2)
+                    pyautogui.write(claim_number[:2])  # Type XX
+                    time.sleep(0.25)
+                    pyautogui.press('tab')
+                    #time.sleep(2)
+                    pyautogui.write(claim_number[3:8])  # Type YYYYY
+                    time.sleep(0.25)
+                    pyautogui.press('tab')
+                    #time.sleep(2)
+                    pyautogui.write(claim_number[9])    # Type Z
+                    time.sleep(0.25)
+                    pyautogui.press('enter')
+                    #time.sleep(2)
+                    pyautogui.press('enter')
+                    #time.sleep(2)
+                    pyautogui.write('NEW')
+                    time.sleep(0.25)
+                    pyautogui.press('enter')
+                    #time.sleep(2)
+                    pyautogui.write('M')
+                    time.sleep(0.25)
+                    pyautogui.press('enter')
+                    
+                    # Wait for a moment before capturing the numbers
+                    time.sleep(0.25)
+
+                    # Capture filtered numbers and save to CSV
+                    screenshot = pyautogui.screenshot()
+                    grayscale_screenshot = screenshot.convert("L")
+                    text = pytesseract.image_to_string(grayscale_screenshot)
+
+                    # Use regular expression to find a 6-digit number after "Fwder Ref: "
+                    match = re.search(r'Fwder Ref: (\d{6})', text)
+                    
+                    if match:
+                        fwder_ref_number = match.group(1)
+                        csv_writer.writerow([claim_number, [int(fwder_ref_number)]])
+                    else:
+                        csv_writer.writerow([claim_number, []])
+
+    print(f"Results saved to {output_csv_filename}")
+
+# Example usage
+input_csv_filename = 'CHANGEME'
+output_csv_filename = 'CHANGEME'
+process_csv_and_capture_numbers(input_csv_filename, output_csv_filename)
