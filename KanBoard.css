@@ -1,0 +1,96 @@
+/* General body styling */
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* Header styling */
+#header {
+    background-color: #1f1f1f;
+    border-bottom: 1px solid #333;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Menu styling */
+#menu {
+    background-color: #1f1f1f;
+    border-right: 1px solid #333;
+    border-radius: 0 10px 10px 0;
+}
+
+#menu li a {
+    color: #e0e0e0;
+}
+
+#menu li a:hover {
+    background-color: #333;
+}
+
+/* Board styling */
+.board-container {
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.board-column-header {
+    background-color: #2e2e2e;
+    color: #fff;
+    border-radius: 10px 10px 0 0;
+    padding: 10px;
+}
+
+.board-column {
+    background-color: #2e2e2e;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.board-task-list {
+    background-color: #1e1e1e;
+    border-radius: 0 0 10px 10px;
+    padding: 10px;
+}
+
+.board-task {
+    background-color: #3e3e3e;
+    border-radius: 10px;
+    color: #e0e0e0;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.board-task:hover {
+    background-color: #5e5e5e;
+}
+
+/* Modal and dialog styling */
+.ui-dialog {
+    background-color: #2e2e2e;
+    color: #e0e0e0;
+    border-radius: 10px;
+}
+
+.ui-dialog-titlebar {
+    background-color: #3e3e3e;
+    border-radius: 10px 10px 0 0;
+}
+
+.ui-dialog-content {
+    background-color: #2e2e2e;
+    border-radius: 0 0 10px 10px;
+}
+
+/* Form elements */
+input, select, textarea {
+    background-color: #3e3e3e;
+    color: #e0e0e0;
+    border-radius: 5px;
+    border: 1px solid #555;
+}
+
+input:focus, select:focus, textarea:focus {
+    background-color: #5e5e5e;
+    border-color: #777;
+}
+
