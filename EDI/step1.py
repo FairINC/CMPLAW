@@ -31,12 +31,12 @@ def process_excel_file(file_path):
 
 def save_to_csv(modified_rows):
     output_file = datetime.now().strftime("%m-%d-%Y") + "_Workload.csv"
-    df = pd.DataFrame(modified_rows, columns=['FILE', 'CRNO', 'Convoke#', 'ChargeOff#', 'L/PY_Date#', 'TermLevel#'])
+    df = pd.DataFrame(modified_rows, columns=['Scrubs1337'])
     df.to_csv(output_file, index=False)
     print(f"Data written to {output_file}")
 
 def main():
-    base_path = "C:\\Scrubs1337"
+    base_path = "Scrubs1337"
     latest_dir = find_most_recent_directory(base_path)
     print(f"Most recent directory found: {latest_dir}")
     
